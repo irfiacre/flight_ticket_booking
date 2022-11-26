@@ -1,4 +1,4 @@
-# flight_ticket_booking
+# Auka Flight Ticket Booking
 
 This is a project for the  C class the project is about Flight tickets booking
 
