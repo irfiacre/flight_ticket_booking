@@ -3,10 +3,10 @@ bin-debug/
 bin-release/
 [Oo]bj/
 [Bb]in/
-
+main
 # Other files and folders
 .settings/
-
+.vscode
 # Executables
 *.swf
 *.air
