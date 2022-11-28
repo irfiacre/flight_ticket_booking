@@ -23,7 +23,7 @@ void display_flight_tickets()
 };
 void search_flight_ticket()
 {
-    printf("Search flight ticket");
+    printf("This is emmy's work");
 };
 void sort_flight_tickets()
 {
