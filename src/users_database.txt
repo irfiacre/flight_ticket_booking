@@ -1,2 +1,5 @@
-100473	Minato	uzumaki	Leaf
-100648	Sasuke	saske	Uchiha
+100618	iradukunda	fiacre	kigali	1
+100310	fiacre	fiacre	bugesera	0
+100324	Cool	minato	uzumaki	0
+100485	uchiha	saske	wutang	0
+100604	loock	lee	freetown	0
