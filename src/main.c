@@ -6,14 +6,13 @@
 struct FlightTicket
 {
     int id;
-    char owner_name[60];
-    char traveler_email[100];
+    char traveler_name[60];
     char origin[100];
     char destination[100];
-    char flight_type[10];
+    int flight_type;
     char departure_date[30];
     char payment_method[40];
-    char note[];
+    char note[100];
 };
 struct User
 {
@@ -26,8 +25,30 @@ struct User
 
 void book_flight_ticket()
 {
-    printf("Booking a flight");
+    struct FlightTicket ft;
+    FILE *ptr;
+    ptr = fopen("../src/database.txt", "a");
+    ft.id = rand();
+    printf("\nEnter Your Name: ");
+    scanf("%s", ft.traveler_name);
+    printf("\nEnter Origin and Destination: ");
+    scanf("%s%s", ft.origin, ft.destination);
+    printf("\nChoose flight Type \n 1.Business \t2. Economic \n: ");
+    scanf("%d", &ft.flight_type);
+    printf("\nChoose Departure time: ");
+    scanf("%s", ft.departure_date);
+    printf("\nEnter Payment method: ");
+    scanf("%s", ft.payment_method);
+    printf("\nAnything we should be aware of: ");
+    scanf("%s", ft.note);
+
+    fprintf(
+        ptr,
+        "%d\t%s\t%s\t%s\t%d\t%s\t%s\t%s\n",
+        ft.id, ft.traveler_name, ft.origin, ft.destination, ft.flight_type, ft.departure_date, ft.payment_method, ft.note);
+    fclose(ptr);
 };
+
 void display_flight_tickets()
 {
     printf("Display flights");
@@ -38,7 +59,65 @@ void search_flight_ticket()
 };
 void sort_flight_tickets()
 {
-    printf("Sort flight ticket");
+    struct FlightTicket ft, temp_ft, ft_array[100];
+    int sort_id, k = 0;
+    FILE *p;
+    p = fopen("database.txt", "r");
+    while (!feof(p))
+    {
+        fscanf(
+            p,
+            "%d\t%s\t%s\t%s\t%d\t%s\t%s\t%s\n",
+            &ft.id, ft.traveler_name, ft.origin, ft.destination, &ft.flight_type, ft.departure_date, ft.payment_method, ft.note);
+        ft_array[k] = ft;
+        k = k + 1;
+    }
+    fclose(p);
+
+    printf("Sort By: \n1.Id\t2.Type \nEnter choice: ");
+    scanf("%d", &sort_id);
+    for (int i = 0; i < k; i++)
+    {
+        int j = i; // Initiating j to compare the current value to values before it
+        if (sort_id == 1)
+        {
+            // Sorting by ID
+            while (j > 0 && ft_array[j - 1].id > ft_array[j].id)
+            {
+                temp_ft = ft_array[j - 1];
+                ft_array[j - 1] = ft_array[j];
+                ft_array[j] = temp_ft;
+                j = j - 1;
+            }
+        }
+        else
+        {
+            // Sorting by Type
+            while (j > 0 && ft_array[j - 1].flight_type > ft_array[j].flight_type)
+            {
+                temp_ft = ft_array[j - 1];
+                ft_array[j - 1] = ft_array[j];
+                ft_array[j] = temp_ft;
+                j = j - 1;
+            }
+        }
+    }
+    p = fopen("sorted_database.txt", "w");
+    for (int i = 0; i < k; i++)
+    {
+        fprintf(
+            p,
+            "%d\t%s\t%s\t%s\t%d\t%s\t%s\t%s\n",
+            ft_array[i].id,
+            ft_array[i].traveler_name,
+            ft_array[i].origin,
+            ft_array[i].destination,
+            ft_array[i].flight_type,
+            ft_array[i].departure_date,
+            ft_array[i].payment_method,
+            ft_array[i].note);
+    }
+    fclose(p);
 };
 
 int generate_id()
