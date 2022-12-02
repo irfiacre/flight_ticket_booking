@@ -167,11 +167,9 @@ void sort_flight_tickets()
             }
         }
     }
-    p = fopen("sorted_database.txt", "w");
     for (int i = 0; i < k; i++)
     {
-        fprintf(
-            p,
+        printf(
             "%d\t%d\t%s\t%s\t%s\t%d\t%s\n",
             ft_array[i].id,
             ft_array[i].user_id,
