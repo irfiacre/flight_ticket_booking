@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
+#include "./function/helpers.c"
 
 struct FlightTicket
 {
@@ -22,19 +23,12 @@ struct User
     int is_admin;
 } user;
 
-int generate_id(int ranger)
-{
-    int lower = 1, upper = 700, count = 1;
-    srand(time(0));
-    return ranger + ((rand() % (upper - lower + 1)) + lower);
-}
-
 void book_flight_ticket()
 {
     struct FlightTicket ft;
     FILE *ptr;
-    ptr = fopen("../src/database.txt", "a");
-    ft.id = generate_id(9000000);
+    ptr = fopen("./database/database.txt", "a");
+    ft.id = generate_random_nbr(9000000);
     ft.user_id = user.user_id;
     strcpy(ft.traveler_name, user.name);
     strcpy(ft.origin, user.city);
@@ -56,7 +50,7 @@ void display_flight_tickets()
 {
     struct FlightTicket display_ft;
     FILE *p;
-    p = fopen("database.txt", "r");
+    p = fopen("./database/database.txt", "r");
     printf("\nID\tName\tOrigin\tDestination\tType\tNote\n==\t=====\t=======\t==========\t======\t========\n");
     while (!feof(p))
     {
@@ -95,7 +89,7 @@ void search_flight_ticket()
     struct FlightTicket searched_ft;
     int ft_id;
     FILE *p;
-    p = fopen("database.txt", "r");
+    p = fopen("./database/database.txt", "r");
     printf("Enter Flight Ticket ID: ");
     scanf("%d", &ft_id);
     while (!feof(p))
@@ -127,7 +121,7 @@ void sort_flight_tickets()
     struct FlightTicket ft, temp_ft, ft_array[100];
     int sort_id, k = 0;
     FILE *p;
-    p = fopen("database.txt", "r");
+    p = fopen("./database/database.txt", "r");
     while (!feof(p))
     {
         fscanf(
@@ -186,7 +180,7 @@ struct User authorization()
 {
     int choice;
     char user_name[60];
-    printf("Choose \n1. Sign in \n2. Register\n0. Exit \nEnter choice: ");
+    printf("\nChoose \n1. Sign in \n2. Register\n0. Exit \nEnter choice: ");
     scanf("%d", &choice);
     FILE *users_file;
     switch (choice)
@@ -194,7 +188,7 @@ struct User authorization()
     case 1:
         printf("Enter username: ");
         scanf("%s", user_name);
-        users_file = fopen("../src/users_database.txt", "r");
+        users_file = fopen("./database/users_database.txt", "r");
         int username_found = 0;
         while (!feof(users_file) && username_found == 0)
         {
@@ -215,20 +209,20 @@ struct User authorization()
         }
         else
         {
-            printf("We do not have a user with username %s", user_name);
+            printf("\nWe do not have a user with username: %s \n", user_name);
             authorization();
         }
 
         break;
     case 2:
-        users_file = fopen("../src/users_database.txt", "a");
+        users_file = fopen("./database/users_database.txt", "a");
         printf("Enter Your Name: ");
         scanf("%s", user.name);
         printf("Choose username: ");
         scanf("%s", user.username);
         printf("Enter Your city: ");
         scanf("%s", user.city);
-        user.user_id = generate_id(100000);
+        user.user_id = generate_random_nbr(100000);
         user.is_admin = 0;
         fprintf(users_file, "%d\t%s\t%s\t%s\t%d\n", user.user_id, user.name, user.username, user.city, user.is_admin);
         fclose(users_file);
