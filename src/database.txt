@@ -1,4 +1,8 @@
-16807	Kabera	Kgl	Kenya	2	10/11/2022	momo	nothing
-282475249	Erik	Kgl	Chad	1	01/01/2023	card	nothing
-1622650073	Paul	Leipzig	Kgl	1	01/10/2022	card	nothing
-984943658	Fiacre	Kgl	Leipzig	1	31/01/2023	mom	nothing
+9000302	100324	Cool	uzumaki	Rukara	2	Nothing
+9000386	100324	Cool	uzumaki	Bugesera	1	Wapipe
+9000582	100324	Cool	uzumaki	Kigali	1	Yes
+9000085	100310	mugabo	bugesera	Singapole	1	eating
+9000316	100310	mugabo	bugesera	buganda	2	dksfbffhbak
+9000596	100604	loock	freetown	internationa	2	yas
+9000309	100253	Young	Bujumbura	Kigali	1	Nothing
+9000498	100253	Young	Bujumbura	Kenya	2	Nothing

@@ -6,12 +6,11 @@
 struct FlightTicket
 {
     int id;
-    char traveler_name[60];
-    char origin[100];
-    char destination[100];
+    int user_id;
+    char traveler_name[200];
+    char origin[200];
+    char destination[200];
     int flight_type;
-    char departure_date[30];
-    char payment_method[40];
     char note[100];
 };
 struct User
@@ -23,40 +22,106 @@ struct User
     int is_admin;
 } user;
 
+int generate_id(int ranger)
+{
+    int lower = 1, upper = 700, count = 1;
+    srand(time(0));
+    return ranger + ((rand() % (upper - lower + 1)) + lower);
+}
+
 void book_flight_ticket()
 {
     struct FlightTicket ft;
     FILE *ptr;
     ptr = fopen("../src/database.txt", "a");
-    ft.id = rand();
-    printf("\nEnter Your Name: ");
-    scanf("%s", ft.traveler_name);
-    printf("\nEnter Origin and Destination: ");
-    scanf("%s%s", ft.origin, ft.destination);
-    printf("\nChoose flight Type \n 1.Business \t2. Economic \n: ");
+    ft.id = generate_id(9000000);
+    ft.user_id = user.user_id;
+    strcpy(ft.traveler_name, user.name);
+    strcpy(ft.origin, user.city);
+    printf("\nEnter Destination: ");
+    scanf("%s", ft.destination);
+    printf("\nChoose Flight Type ( 1.Business 2.Economic ) \nEnter choice: ");
     scanf("%d", &ft.flight_type);
-    printf("\nChoose Departure time: ");
-    scanf("%s", ft.departure_date);
-    printf("\nEnter Payment method: ");
-    scanf("%s", ft.payment_method);
     printf("\nAnything we should be aware of: ");
     scanf("%s", ft.note);
-
     fprintf(
         ptr,
-        "%d\t%s\t%s\t%s\t%d\t%s\t%s\t%s\n",
-        ft.id, ft.traveler_name, ft.origin, ft.destination, ft.flight_type, ft.departure_date, ft.payment_method, ft.note);
+        "%d\t%d\t%s\t%s\t%s\t%d\t%s\n",
+        ft.id, ft.user_id, ft.traveler_name, ft.origin, ft.destination, ft.flight_type, ft.note);
     fclose(ptr);
+    printf("\n ✅ Flick Ticket Booked \n");
 };
 
 void display_flight_tickets()
 {
-    printf("Display flights");
+    struct FlightTicket display_ft;
+    FILE *p;
+    p = fopen("database.txt", "r");
+    printf("\nID\tName\tOrigin\tDestination\tType\tNote\n==\t=====\t=======\t==========\t======\t========\n");
+    while (!feof(p))
+    {
+        fscanf(
+            p,
+            "%d\t%d\t%s\t%s\t%s\t%d\t%s\n",
+            &display_ft.id, &display_ft.user_id, display_ft.traveler_name, display_ft.origin, display_ft.destination, &display_ft.flight_type, display_ft.note);
+        if (user.user_id == display_ft.user_id && user.is_admin == 0)
+        {
+            printf(
+                "%d\t%s\t%s\t%s\t%d\t%s\n",
+                display_ft.id,
+                display_ft.traveler_name,
+                display_ft.origin,
+                display_ft.destination,
+                display_ft.flight_type,
+                display_ft.note);
+        }
+        else if (user.is_admin == 1)
+        {
+            printf(
+                "%d\t%s\t%s\t%s\t%d\t%s\n",
+                display_ft.id,
+                display_ft.traveler_name,
+                display_ft.origin,
+                display_ft.destination,
+                display_ft.flight_type,
+                display_ft.note);
+        }
+        }
+    fclose(p);
 };
+
 void search_flight_ticket()
 {
-    printf("Search flight ticket");
+    struct FlightTicket searched_ft;
+    int ft_id;
+    FILE *p;
+    p = fopen("database.txt", "r");
+    printf("Enter Flight Ticket ID: ");
+    scanf("%d", &ft_id);
+    while (!feof(p))
+    {
+        fscanf(
+            p,
+            "%d\t%d\t%s\t%s\t%s\t%d\t%s\n",
+            &searched_ft.id, &searched_ft.user_id, searched_ft.traveler_name, searched_ft.origin, searched_ft.destination, &searched_ft.flight_type, searched_ft.note);
+        if (ft_id == searched_ft.id)
+        {
+            printf("\nID\tUser's Name\tOrigin\tDestination\tType\tNote\n==\t=============\t=======\t==========\t======\t========\n");
+            printf(
+                "%d\t%s\t%s\t%s\t%d\t%s\n",
+                searched_ft.id,
+                searched_ft.traveler_name,
+                searched_ft.origin,
+                searched_ft.destination,
+                searched_ft.flight_type,
+                searched_ft.note
+            );
+            break;
+        }
+    }
+    fclose(p);
 };
+
 void sort_flight_tickets()
 {
     struct FlightTicket ft, temp_ft, ft_array[100];
@@ -67,8 +132,8 @@ void sort_flight_tickets()
     {
         fscanf(
             p,
-            "%d\t%s\t%s\t%s\t%d\t%s\t%s\t%s\n",
-            &ft.id, ft.traveler_name, ft.origin, ft.destination, &ft.flight_type, ft.departure_date, ft.payment_method, ft.note);
+            "%d\t%d\t%s\t%s\t%s\t%d\t%s\n",
+            &ft.id, &ft.user_id, ft.traveler_name, ft.origin, ft.destination, &ft.flight_type, ft.note);
         ft_array[k] = ft;
         k = k + 1;
     }
@@ -107,31 +172,23 @@ void sort_flight_tickets()
     {
         fprintf(
             p,
-            "%d\t%s\t%s\t%s\t%d\t%s\t%s\t%s\n",
+            "%d\t%d\t%s\t%s\t%s\t%d\t%s\n",
             ft_array[i].id,
+            ft_array[i].user_id,
             ft_array[i].traveler_name,
             ft_array[i].origin,
             ft_array[i].destination,
             ft_array[i].flight_type,
-            ft_array[i].departure_date,
-            ft_array[i].payment_method,
             ft_array[i].note);
     }
     fclose(p);
 };
 
-int generate_id()
-{
-    int lower = 1, upper = 700, count = 1;
-    srand(time(0));
-    return 100000 + ((rand() % (upper - lower + 1)) + lower);
-}
-
 struct User authorization()
 {
     int choice;
     char user_name[60];
-    printf("Choose \n1. Sign in \n2. Register\nEnter choice: ");
+    printf("Choose \n1. Sign in \n2. Register\n0. Exit \nEnter choice: ");
     scanf("%d", &choice);
     FILE *users_file;
     switch (choice)
@@ -173,7 +230,7 @@ struct User authorization()
         scanf("%s", user.username);
         printf("Enter Your city: ");
         scanf("%s", user.city);
-        user.user_id = generate_id();
+        user.user_id = generate_id(100000);
         user.is_admin = 0;
         fprintf(users_file, "%d\t%s\t%s\t%s\t%d\n", user.user_id, user.name, user.username, user.city, user.is_admin);
         fclose(users_file);
@@ -197,11 +254,10 @@ int main()
 {
     int oper;
     printf("Welcome to my Auka Flights management \n");
-    struct User new_user = authorization();
-    printf("%d\t%s\t%s\t%s\t%d\n", new_user.user_id, new_user.name, new_user.username, new_user.city, new_user.is_admin);
+    struct User current_user = authorization();
     do
     {
-        if (new_user.is_admin == 0)
+        if (current_user.is_admin == 0)
         {
             printf("\n \tMain Menu\n|---------------------------|\n");
             printf("1. Book Flight Ticket \n");
@@ -227,10 +283,9 @@ int main()
         else
         {
             printf("\n \tMain Menu\n|---------------------------|\n");
-            printf("1. Book Flight Ticket \n");
-            printf("2. View Flight Tickets\n");
-            printf("3. Search Flight Ticket\n");
-            printf("4. Sort List of Flight Tickets \n");
+            printf("1. View Flight Tickets\n");
+            printf("2. Search Flight Ticket\n");
+            printf("3. Sort List of Flight Tickets \n");
             printf("0. Exit\n");
             printf("\nChoose::: ");
             scanf("%d", &oper);
@@ -238,15 +293,12 @@ int main()
             switch (oper)
             {
             case 1:
-                book_flight_ticket();
-                break;
-            case 2:
                 display_flight_tickets();
                 break;
-            case 3:
+            case 2:
                 search_flight_ticket();
                 break;
-            case 4:
+            case 3:
                 sort_flight_tickets();
                 break;
             case 0:
