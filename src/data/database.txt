@@ -1,0 +1,4 @@
+9000266	100364	Newuser	Kigali	Kanombe	1	nothing
+9000126	100364	Newuser	Kigali	Collision	1	nothing
+9000609	100618	Ishimwe	Bugesera	Kilimanjaro	1	nothing
+9000350	100618	Ishimwe	Bugesera	Kigali	2	djks

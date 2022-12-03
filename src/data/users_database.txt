@@ -1,0 +1,4 @@
+100618	Default	admin	Kigali	1
+100618	Default	userk	Kamembe	0
+100618	Ishimwe	kevin	Bugesera	0
+100364	Newuser	nuser	Kigali	0
