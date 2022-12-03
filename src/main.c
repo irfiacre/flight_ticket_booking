@@ -12,7 +12,9 @@ int main()
 {
     int oper;
     load_default_users();
-    printf("\nWelcome to my Auka Flights management \n");
+    printf("\n----------------------------------------------------------------\n");
+    printf(" *********| WELCOME TO AUKA FLIGHT TICKET MANAGEMENT |*********\n");
+    printf("----------------------------------------------------------------\n");
     struct User current_user = authorization();
     do
     {
@@ -33,7 +35,7 @@ int main()
                 display_flight_tickets();
                 break;
             case 0:
-                printf("\n ============ We are sad to see you go ============ \n");
+                printf("\n===============================\n Good Bye, See you Next!!! \n===============================\n");
                 break;
             default:
                 printf("\n Wrong choice\n");
@@ -61,7 +63,7 @@ int main()
                 sort_flight_tickets();
                 break;
             case 0:
-                printf("\n ============ We are sad to see you go ============ \n");
+                printf("\n===============================\n Good Bye, See you Next!!! \n===============================\n");
                 break;
             default:
                 printf("\n Invalid choice\n");

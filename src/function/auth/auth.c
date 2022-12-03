@@ -60,7 +60,7 @@ struct User authorization()
         authorization();
         break;
     case 0:
-        printf("\n ============ We are sad to see you go ============ \n");
+        printf("\n===============================\n Good Bye, See you Next!!! \n===============================\n");
         exit(0);
         break;
     default:
