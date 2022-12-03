@@ -5,7 +5,8 @@ struct FlightTicket
 {
     int id;
     int user_id;
-    char traveler_name[200];
+    char user_fname[200];
+    char user_lname[200];
     char origin[200];
     char destination[200];
     int flight_type;

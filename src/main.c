@@ -11,6 +11,7 @@
 int main()
 {
     int oper;
+    load_default_users();
     printf("\nWelcome to my Auka Flights management \n");
     struct User current_user = authorization();
     do
@@ -21,7 +22,7 @@ int main()
             printf("1. Book Flight Ticket \n");
             printf("2. View Flight Tickets\n");
             printf("0. Exit\n");
-            printf("\nChoose::: ");
+            printf("\nEnter choice: ");
             scanf("%d", &oper);
             switch (oper)
             {
@@ -45,7 +46,7 @@ int main()
             printf("2. Search Flight Ticket\n");
             printf("3. Sort List of Flight Tickets \n");
             printf("0. Exit\n");
-            printf("\nChoose::: ");
+            printf("\nEnter choice: ");
             scanf("%d", &oper);
 
             switch (oper)
