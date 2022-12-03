@@ -55,12 +55,13 @@ void sort_flight_tickets()
             }
         }
     }
+    printf(
+        "\nID\tFirst Name\tLast Name\tOrigin  \tDestination\tType\tNote\n===\t===========\t===========\t======= \t============\t======\t========\n");
     for (int i = 0; i < k; i++)
     {
         printf(
-            "%d\t%d\t%s\t%s\t%s\t%s\t%d\t%s\n",
+            "%d\t%-8s\t%-8s\t%-8s\t%-8s\t%d\t%-15s\n",
             ft_array[i].id,
-            ft_array[i].user_id,
             ft_array[i].user_fname,
             ft_array[i].user_lname,
             ft_array[i].origin,

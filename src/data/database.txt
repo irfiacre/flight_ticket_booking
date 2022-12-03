@@ -1,6 +1,0 @@
-9000070	100273	Default	User	Bugesera	Kenya	1	dskjjsd
-9000217	100273	Default	User	Bugesera	Bujumbura	2	dfkdagfbfjkhvbfvjkhdf
-9000420	100273	Default	User	Bugesera	nksdnd	2	dsljknljlkdfnkvreibv
-9000280	100133	Kalisa	alex	Burera	Uganda	1	KJSFJBVEA
-9000133	100273	Default	User	Bugesera	Togo	2	Nothing
-9000392	100217	new	user	Bugesera	Murambi	1	nothing

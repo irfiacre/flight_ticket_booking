@@ -85,7 +85,7 @@ void search_flight_ticket()
             printf(
                 "\nID\tFirst Name\tLast Name\tOrigin  \tDestination\tType\tNote\n===\t===========\t===========\t======= \t============\t======\t========\n");
             printf(
-                "%d\t%s\t%s\t%s\t%s\t%d\t%s\n",
+                "%d\t%-8s\t%-8s\t%-8s\t%-8s\t%d\t%-15s\n",
                 searched_ft.id,
                 searched_ft.user_fname,
                 searched_ft.user_lname,
