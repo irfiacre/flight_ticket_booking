@@ -4,7 +4,8 @@
 struct User
 {
     int user_id;
-    char name[200];
+    char fname[200];
+    char lname[200];
     char username[60];
     char city[200];
     int is_admin;

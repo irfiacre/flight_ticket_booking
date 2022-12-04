@@ -21,7 +21,7 @@ struct User authorization()
         int username_found = 0;
         while (!feof(users_file) && username_found == 0)
         {
-            fscanf(users_file, "%d\t%s\t%s\t%s\t%d\n", &user.user_id, user.name, user.username, user.city, &user.is_admin);
+            fscanf(users_file, "%d\t%s\t%s\t%s\t%s\t%d\n", &user.user_id, user.fname, user.lname, user.username, user.city, &user.is_admin);
             if (strcmp(user.username, user_name) == 0)
             {
                 username_found = 1;
@@ -44,21 +44,23 @@ struct User authorization()
         break;
     case 2:
         users_file = fopen("data/users_database.txt", "a");
-        printf("Enter Your Name: ");
-        scanf("%s", user.name);
+        printf("Enter Your First Name: ");
+        scanf("%s", user.fname);
+        printf("Enter Your Last Name: ");
+        scanf("%s", user.lname);
         printf("Choose username: ");
         scanf("%s", user.username);
         printf("Enter Your city: ");
         scanf("%s", user.city);
         user.user_id = generate_random_nbr(100000);
         user.is_admin = 0;
-        fprintf(users_file, "%d\t%s\t%s\t%s\t%d\n", user.user_id, user.name, user.username, user.city, user.is_admin);
+        fprintf(users_file, "%d\t%s\t%s\t%s\t%s\t%d\n", user.user_id, user.fname, user.lname, user.username, user.city, user.is_admin);
         fclose(users_file);
         printf("\n User successfully Registered ✅ \n");
         authorization();
         break;
     case 0:
-        printf("\n ============ We are sad to see you go ============ \n");
+        printf("\n===============================\n Good Bye, See you Next!!! \n===============================\n");
         exit(0);
         break;
     default:

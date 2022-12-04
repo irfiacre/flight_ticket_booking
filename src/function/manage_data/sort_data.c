@@ -14,10 +14,15 @@ void sort_flight_tickets()
     data_file = fopen("data/database.txt", "r");
     while (!feof(data_file))
     {
-        fscanf(
-            data_file,
-            "%d\t%d\t%s\t%s\t%s\t%d\t%s\n",
-            &ft.id, &ft.user_id, ft.traveler_name, ft.origin, ft.destination, &ft.flight_type, ft.note);
+        fscanf(data_file, "%d\t%d\t%s\t%s\t%s\t%s\t%d\t%s\n",
+               &ft.id,
+               &ft.user_id,
+               ft.user_fname,
+               ft.user_lname,
+               ft.origin,
+               ft.destination,
+               &ft.flight_type,
+               ft.note);
         ft_array[k] = ft;
         k = k + 1;
     }
@@ -50,13 +55,15 @@ void sort_flight_tickets()
             }
         }
     }
+    printf(
+        "\nID\tFirst Name\tLast Name\tOrigin  \tDestination\tType\tNote\n===\t===========\t===========\t======= \t============\t======\t========\n");
     for (int i = 0; i < k; i++)
     {
         printf(
-            "%d\t%d\t%s\t%s\t%s\t%d\t%s\n",
+            "%d\t%-8s\t%-8s\t%-8s\t%-8s\t%d\t%-15s\n",
             ft_array[i].id,
-            ft_array[i].user_id,
-            ft_array[i].traveler_name,
+            ft_array[i].user_fname,
+            ft_array[i].user_lname,
             ft_array[i].origin,
             ft_array[i].destination,
             ft_array[i].flight_type,

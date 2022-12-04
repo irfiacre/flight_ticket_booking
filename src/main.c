@@ -11,7 +11,10 @@
 int main()
 {
     int oper;
-    printf("\nWelcome to my Auka Flights management \n");
+    load_default_users();
+    printf("\n----------------------------------------------------------------\n");
+    printf(" *********| WELCOME TO AUKA FLIGHT TICKET MANAGEMENT |*********\n");
+    printf("----------------------------------------------------------------\n");
     struct User current_user = authorization();
     do
     {
@@ -21,7 +24,7 @@ int main()
             printf("1. Book Flight Ticket \n");
             printf("2. View Flight Tickets\n");
             printf("0. Exit\n");
-            printf("\nChoose::: ");
+            printf("\nEnter choice: ");
             scanf("%d", &oper);
             switch (oper)
             {
@@ -32,7 +35,7 @@ int main()
                 display_flight_tickets();
                 break;
             case 0:
-                printf("\n ============ We are sad to see you go ============ \n");
+                printf("\n===============================\n Good Bye, See you Next!!! \n===============================\n");
                 break;
             default:
                 printf("\n Wrong choice\n");
@@ -45,7 +48,7 @@ int main()
             printf("2. Search Flight Ticket\n");
             printf("3. Sort List of Flight Tickets \n");
             printf("0. Exit\n");
-            printf("\nChoose::: ");
+            printf("\nEnter choice: ");
             scanf("%d", &oper);
 
             switch (oper)
@@ -60,7 +63,7 @@ int main()
                 sort_flight_tickets();
                 break;
             case 0:
-                printf("\n ============ We are sad to see you go ============ \n");
+                printf("\n===============================\n Good Bye, See you Next!!! \n===============================\n");
                 break;
             default:
                 printf("\n Invalid choice\n");
